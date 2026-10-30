@@ -37,8 +37,8 @@ def setup_argparse():
     parser.add_argument("-o", "--output-file", help="Path to the output PEM file (default: stdout).", default=None)
     parser.add_argument("-f", "--output-format",
                         choices=["PKCS1", "PKCS8", "SubjectPublicKeyInfo", "TraditionalOpenSSL"],
-                        default="PKCS8",
-                        help="Output format (PKCS1, PKCS8, SubjectPublicKeyInfo, TraditionalOpenSSL - default: PKCS8).")
+                        default=None,
+                        help="Output format (default: PKCS8 for a private key, SubjectPublicKeyInfo for a public key).")
 
     # Key type option
     parser.add_argument("-t", "--key-type", choices=["private", "public", "dhparams"], default="private",
@@ -71,7 +71,14 @@ def convert_pem(input_data, output_file, output_format, key_type, encryption, pa
             # encryption is 'best'. With encryption 'none' an encrypted
             # input plus its password converts to a plain output, which
             # is the combination the examples rely on.
-            private_key = load_pem_private_key(input_data.encode('utf-8'), password.encode('utf-8') if password else None, backend=default_backend())
+            # Only an encrypted input may be given the password: passing
+            # one for a plain key makes the loader reject the key, which
+            # made "-e best -pw ..." fail on every unencrypted input,
+            # exactly the case that flag combination is for.
+            load_password = password if ("ENCRYPTED" in input_data) else None
+            private_key = load_pem_private_key(input_data.encode('utf-8'), load_password.encode('utf-8') if load_password else None, backend=default_backend())
+            if output_format is None:
+                output_format = "PKCS8"
             if output_format == "PKCS1":
                 # There is no PrivateFormat.PKCS1 in the cryptography
                 # library; naming it raised AttributeError on every
@@ -107,6 +114,10 @@ def convert_pem(input_data, output_file, output_format, key_type, encryption, pa
 
         elif key_type == "public":
             public_key = load_pem_public_key(input_data.encode('utf-8'), backend=default_backend())
+            if output_format is None:
+                # A fixed PKCS8 default made every public key run without
+                # -f fail, because PKCS8 is a private key format.
+                output_format = "SubjectPublicKeyInfo"
             if output_format == "SubjectPublicKeyInfo":
                 output_format_enum = PublicFormat.SubjectPublicKeyInfo
             else:
