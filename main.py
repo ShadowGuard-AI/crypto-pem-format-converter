@@ -65,9 +65,24 @@ def convert_pem(input_data, output_file, output_format, key_type, encryption, pa
     """
     try:
         if key_type == "private":
+            # One password argument does two jobs in this tool: it
+            # decrypts the input when the input is encrypted, and it is
+            # the password the output is encrypted with when
+            # encryption is 'best'. With encryption 'none' an encrypted
+            # input plus its password converts to a plain output, which
+            # is the combination the examples rely on.
             private_key = load_pem_private_key(input_data.encode('utf-8'), password.encode('utf-8') if password else None, backend=default_backend())
             if output_format == "PKCS1":
-                output_format_enum = PrivateFormat.PKCS1
+                # There is no PrivateFormat.PKCS1 in the cryptography
+                # library; naming it raised AttributeError on every
+                # PKCS1 run. For an RSA key the traditional OpenSSL form
+                # is the PKCS1 form (BEGIN RSA PRIVATE KEY). Other key
+                # types have no PKCS1 form at all, so name that instead
+                # of failing with a library error.
+                from cryptography.hazmat.primitives.asymmetric import rsa as _rsa
+                if not isinstance(private_key, _rsa.RSAPrivateKey):
+                    raise ValueError("PKCS1 output is only defined for RSA private keys. Use PKCS8 for this key.")
+                output_format_enum = PrivateFormat.TraditionalOpenSSL
             elif output_format == "PKCS8":
                 output_format_enum = PrivateFormat.PKCS8
             elif output_format == "TraditionalOpenSSL":
@@ -176,31 +191,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-# Usage Examples:
-#
-# 1. Convert a PKCS#1 private key to PKCS#8 (unencrypted):
-#    python main.py -i private_key.pem -o private_key_pkcs8.pem -f PKCS8 -t private -e none
-#
-# 2. Convert a PKCS#1 private key to PKCS#8 (encrypted with a password):
-#    python main.py -i private_key.pem -o private_key_pkcs8_encrypted.pem -f PKCS8 -t private -e best -pw "mysecretpassword"
-#
-# 3. Convert a private key to TraditionalOpenSSL format:
-#    python main.py -i private_key.pem -o private_key_traditional.pem -f TraditionalOpenSSL -t private -e none
-#
-# 4. Convert a public key to SubjectPublicKeyInfo format:
-#    python main.py -i public_key.pem -o public_key_spki.pem -f SubjectPublicKeyInfo -t public
-#
-# 5. Convert Diffie-Hellman Parameters
-#    python main.py -i dhparams.pem -o dhparams_out.pem -t dhparams
-#
-# 6. Convert with private key pasted on the command line:
-#   python main.py -p "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----" -o private_key_pkcs8.pem -f PKCS8
-#
-# 7. Convert with public key pasted on the command line:
-#   python main.py -u "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----" -o public_key_spki.pem -f SubjectPublicKeyInfo -t public
-#
-# Offensive Tool Usage (Example):
-#  - Convert a captured private key to a different format for use with a specific exploit or framework that requires a particular format.
-#  - Generate unencrypted private keys from encrypted ones (if the password is known) for use in automated attacks where password prompting is not possible.
-#
