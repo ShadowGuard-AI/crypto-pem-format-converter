@@ -75,6 +75,11 @@ def convert_pem(input_data, output_file, output_format, key_type, encryption, pa
             # one for a plain key makes the loader reject the key, which
             # made "-e best -pw ..." fail on every unencrypted input,
             # exactly the case that flag combination is for.
+            # Detection is a substring search, not a parse of the PEM
+            # headers. It works for the forms the library produces
+            # (the word appears in an encrypted key's header lines),
+            # but anything that merely contains that word in the text
+            # would be treated as an encrypted key too.
             load_password = password if ("ENCRYPTED" in input_data) else None
             private_key = load_pem_private_key(input_data.encode('utf-8'), load_password.encode('utf-8') if load_password else None, backend=default_backend())
             if output_format is None:
@@ -129,6 +134,8 @@ def convert_pem(input_data, output_file, output_format, key_type, encryption, pa
             )
 
         elif key_type == "dhparams":
+            # The format choice is ignored on this branch: parameters
+            # only have the one PEM form here, whatever -f asked for.
             dhparams = load_pem_parameters(input_data.encode('utf-8'), backend=default_backend())
 
             pem_data = dhparams.parameter_bytes(
@@ -173,6 +180,10 @@ def main():
     parser = setup_argparse()
     args = parser.parse_args()
 
+    # The input flags and --key-type are separate choices that I never
+    # reconcile: pasting a public key with -u still needs -t public, or
+    # the text goes to the private loader and fails there. The flag a
+    # key arrived by does not say what it is.
     input_data = None
     if args.input_file:
         try:
