@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 300" role="img" aria-label="moonlight lane scene">
+<rect width="1200" height="300" fill="#232a4a"/>
+<g><animateTransform attributeName="transform" type="translate" values="-80 0;1080 0" dur="60s" repeatCount="indefinite"/><circle cx="60" cy="42" r="24" fill="#e8edf2"><animate attributeName="r" values="10;24;24;10" keyTimes="0;0.35;0.65;1" dur="60s" repeatCount="indefinite"/></circle></g>
+<rect x="0" y="196" width="1200" height="104" fill="#1a2c22"/>
+<g><animateTransform attributeName="transform" type="translate" values="-260 0;1250 0" dur="48s" repeatCount="indefinite"/>
+<rect x="60" y="176" width="240" height="52" fill="#14161f"/><rect x="60" y="176" width="240" height="52" fill="none" stroke="#e8edf2" stroke-width="2"/>
+<rect x="76" y="146" width="62" height="30" fill="#3a4060"/><rect x="150" y="152" width="48" height="24" fill="#483c30"/><rect x="210" y="138" width="26" height="38" fill="#423a4a"/>
+<circle cx="104" cy="238" r="24" fill="none" stroke="#e8edf2" stroke-width="4"/><circle cx="262" cy="238" r="24" fill="none" stroke="#e8edf2" stroke-width="4"/>
+<g><animate attributeName="opacity" values="0.75;1;0.75" dur="3.2s" repeatCount="indefinite"/><rect x="34" y="188" width="10" height="16" fill="#e0a83c"/></g>
+<g fill="#14161f"><circle cx="330" cy="196" r="7"/><rect x="324" y="202" width="13" height="34"/><circle cx="362" cy="198" r="7"/><rect x="356" y="204" width="13" height="32"/></g></g>
+<path d="M0,268 q300,-16 600,-4 q300,10 600,-6" fill="none" stroke="#2e3a6e" stroke-width="10"/>
+<path d="M0,268 q300,-16 600,-4 q300,10 600,-6" fill="none" stroke="#e8edf2" stroke-width="3"><animate attributeName="opacity" values="0.25;0.9" dur="40s" repeatCount="indefinite"/></path>
+<g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;-70 34;-70 34" keyTimes="0;0.62;0.78;1" dur="52s" repeatCount="indefinite"/><rect x="1052" y="212" width="9" height="52" fill="#14161f"/><ellipse cx="1056" cy="206" rx="11" ry="7" fill="#14161f"/><circle cx="1052" cy="203" r="2" fill="#e8edf2"/></g>
+</svg>

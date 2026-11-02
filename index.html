@@ -1,165 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Crypto Pem Format Converter: what it is, how it runs, where it stops</title>
-<meta name="description" content="Converts a PEM encoded private key, public key, or Diffie-Hellman parameter set between container formats: PKCS8, TraditionalOpenSSL, SubjectPublicKey">
-<style>
-:root {
-  --bg: #1e2014; --panel: #2c2e1e; --ink: #eeecdc;
-  --mut: #3b3e28;
-  --acc: #ceb25c; --acc2: #b2603e;
-  --line: #2c2e1e;
-}
-* { box-sizing: border-box; }
-body { margin: 0; background: var(--bg); color: var(--ink);
-  font-family: Verdana, Geneva, sans-serif; line-height: 1.55; }
-code, pre, .mono { font-family: 'Lucida Console', monospace; }
-a { color: var(--acc2); }
-.hero { padding: 3rem 6vw 1rem; }
-.hero img.banner { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; }
-.logo { width: 92px; height: 92px; border-radius: 18px;
-  border: 1px solid var(--line); }
-h1 { font-size: 2.4rem; margin: 0.4em 0 0.1em; }
-h2 { border-bottom: 2px solid var(--acc); padding-bottom: 0.2em;
-  margin-top: 2em; }
-.lede { font-size: 1.15rem; max-width: 62ch; }
-main { padding: 0 6vw 3rem; max-width: 1180px; margin: 0 auto; }
-.grid { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
-.card { background: var(--panel); border: 1px solid var(--line);
-  border-radius: 12px; padding: 1rem 1.2rem; }
-.card.pop { animation: rise 0.7s ease both; }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); }
-  to { opacity: 1; transform: none; } }
-pre.code { background: #101014; color: #e8e6df; padding: 1rem 1.2rem;
-  border-radius: 12px; overflow-x: auto; font-size: 0.86rem;
-  border-left: 5px solid var(--acc); }
-table { border-collapse: collapse; width: 100%; }
-td, th { border-bottom: 1px solid var(--line); padding: 0.45rem 0.6rem;
-  text-align: left; }
-.shots { display: grid; gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
-.shots img { width: 100%; height: auto; border: 1px solid var(--line);
-  border-radius: 10px; background: #f4f1e8; }
-footer { padding: 2rem 6vw; border-top: 1px solid var(--line);
-  color: var(--mut); }
-.rail { display: flex; gap: 1.2rem; align-items: flex-start; }
-.rail nav { position: sticky; top: 1rem; min-width: 180px; }
-@media (max-width: 760px) { .rail { flex-direction: column; }
-  .rail nav { position: static; } }
-@media (prefers-reduced-motion: reduce) {
-  .card.pop { animation: none; } * { scroll-behavior: auto; } }
-</style>
-</head>
-<body class="layout-split">
-<!-- This page exists for crypto-pem-format-converter alone: the layout (split-hero),
-     the colors, and the type were picked for this project, not
-     shared with the other project pages. The code block below is
-     copied from the file it names, line for line. If it looks
-     plain, that is because the project is plain, and I would
-     rather the page match the project than dress it up. The one
-     thing I will not do here is oversell: what this project does
-     not do is stated on the page, not hidden from it. -->
-<header class="hero">
-  <img class="logo" src="assets/logo.png" alt="Crypto Pem Format Converter logo">
-  <img class="banner" src="assets/banner.png" alt="">
-  <h1>Crypto Pem Format Converter</h1>
-  <p class="mono"><a href="https://github.com/ShadowGuard-AI/crypto-pem-format-converter">github.com/ShadowGuard-AI/crypto-pem-format-converter</a></p>
-</header>
+<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>crypto-pem-format-converter: The Moonlight Flit of the Country House</title>
+<style>@font-face{font-family:Disp;src:url("fonts/Bitcount.ttf")}@font-face{font-family:Text;src:url("fonts/Bitter.ttf")}
+body{background:#232a4a;font-family:Text,serif;color:#e8edf2;margin:0}main{max-width:920px;margin:0 auto;padding:28px}
+h1,h2{font-family:Disp,serif;color:#e8edf2}h3{font-family:Text,serif;color:#e8edf2}
+section{background:#2c3352;padding:18px 22px;margin:16px 0;border:1px solid #e0a83c}
+img{max-width:100%}button{background:#2c3352;color:#e8edf2;border:2px solid #e0a83c;padding:10px 14px;margin:4px;font-family:Disp,serif}
+pre{white-space:pre-wrap;font-family:Text,serif}</style></head><body><main>
+<img src="intro-banner.png" alt="A lane at night before any removal: the house far off with dark windows and a cold chimney, hedges with frost on their tops, an empty rutted moonlit track and a gate standing open, no cart and nobody walking"><h1>crypto-pem-format-converter: The Moonlight Flit of the Country House</h1>
+<p>Theme: The Moonlight Flit of the Country House. Headings in Bitcount, running text in Bitter.</p>
+<img src="logo.png" alt="A hand cart seen from the side, laden with tied bundles, a chair roped upright and a rolled rug, one shuttered lantern in lamp amber at the shaft and frost on the wheel rims, the name lettered below in the night watch hand"><img src="banner.png" alt="The flit in transit: the loaded cart in the foreground with the tenant family walking beside it, one carrying the lantern, the emptied house behind with one last lit pane, the lane bending to a gate and a cottage ahead under a moon a quarter past its fullest, the name chalked in frost on the cart side board">
+<img src="scene.svg" alt="The lane in three bands: the moon crossing slowly and changing phase, the loaded cart travelling at walking pace with its lantern swaying while the family keeps pace beside it, and frost settling on a foreground hedge top where a cat sits awake on a gate post and later leaves on its own feet"><div><button type="button">Convert and Carry</button></div><h3>Source, One Only</h3><h3>Travelling Form</h3><h3>What Is Being Carried</h3><h3>Wrapping for the Road</h3><h3>Set Down At, Blank to Print</h3>
+<section><h2>Purpose entry</h2><p>The tool takes a PEM encoded private key, public key or Diffie Hellman parameter set and rewrites it into another container form, naming the forms exactly as the parser names them: PKCS8, PKCS1, TraditionalOpenSSL and SubjectPublicKeyInfo. The choice is not free in every direction, since a public key can be written only as SubjectPublicKeyInfo, while PKCS1 output is open only to RSA private keys and is produced in its TraditionalOpenSSL form, the block headed as an RSA private key.</p></section>
+<section><h2>Inputs entry</h2><p>Exactly one source must be given: file path, pasted private key, pasted public key or pasted DH parameters, held in a mutually exclusive group that the parser enforces. The key type option, which defaults to private and may be set to public or dhparams, must match what actually arrived, because the source flag does not settle the type and a public key pasted under the private type is sent to the private loader and fails there.</p></section>
+<section><h2>Formats entry</h2><p>The defaults are PKCS8 for a private key and SubjectPublicKeyInfo for a public key. On the DH parameters branch the format choice is ignored altogether and the parameters are written in their single PKCS3 PEM form whatever was requested.</p></section>
+<section><h2>Wrapping entry</h2><p>The encryption option offers none or best and defaults to none. The password option supplies one password that does two jobs inside a single run, opening an encrypted input where the input is encrypted, and sealing the output when best has been chosen, with a run under best and no password ending in refusal. Detection of an encrypted input rests on a substring search of the text, stated openly here because a text that merely contained that word would be treated as an encrypted key. No password value is shown anywhere in this re-skin.</p></section>
+<section><h2>Closing entries</h2><p>With no output file named, the converted PEM is printed to standard output in full; with one named, it is written there and the writing is logged. Bad input, a format unsupported for the key type in hand, an unsupported algorithm, a wrong password or a missing file each end the run at exit 1. The requirement is Python 3 with the cryptography package at version 41.0.7 or later. The licence is MIT, held in the LICENSE file. No live run is claimed here, because the cryptography package was not installed in the environment where the README was verified, so even the help output stopped at that import.</p></section>
+<section><h2>Preserved live README record</h2><pre># crypto-pem-format-converter
 
-<main>
-  <section class="rail">
-    <nav aria-label="on this page">
-      <p class="mono"><a href="#run">Run it</a><br>
-      <a href="#files">The files</a><br>
-      <a href="#sheets">The sheets</a><br>
-      <a href="https://github.com/ShadowGuard-AI/crypto-pem-format-converter">The repo</a></p>
-    </nav>
-    <div>
-      <p class="lede">Converts a PEM encoded private key, public key, or Diffie-Hellman parameter set between container formats: PKCS8, TraditionalOpenSSL, SubjectPublicKeyInfo for public keys, and PKCS1 for RSA private keys (written in its TraditionalOpenSSL form, the BEGIN RSA PRIVATE KEY block).</p>
-      <div class="grid">
-        <div class="card pop"><h3>What it is</h3>
-          <p>Crypto Pem Format Converter: 5 files, 247 counted
-          lines across Python 204, Markdown 42, Text 1. One job, done in the
-          open, in files you can read.</p></div>
-        <div class="card pop"><h3>The biggest piece</h3>
-          <p><code>main.py</code> carries the most
-          lines. If the project grows, that file is where the growth
-          lands first, for better or worse.</p></div>
-        <div class="card pop"><h3>The honest gap</h3>
-          <p>No test files yet. That is the honest gap, and the roadmap in the visuals folder says what the first one should cover.</p></div>
-      </div>
-      <section id="run">
-        <h2>Run it</h2>
-        <p>The repo README has the exact commands for this one. The
-        shape is the shape for most of my projects: clone it, read the
-        top file first so you know what will happen, then run it on
-        something you do not mind breaking.</p>
-        <p class="mono">$ git clone https://github.com/ShadowGuard-AI/crypto-pem-format-converter.git<br>$ cd crypto-pem-format-converter</p>
-      </section>
-      
-  <section aria-label="real code">
-    <h2>The code, as it sits in the repo</h2>
-    <p>From <code>main.py</code>, line 21 on. I did
-    not tidy it for the page. What you see is what the file has.</p>
-    <pre class="code"><code>logging.basicConfig(level=logging.INFO, format=&#x27;%(asctime)s - %(levelname)s - %(message)s&#x27;)
+Converts a PEM encoded private key, public key, or Diffie-Hellman parameter set between container formats: PKCS8, TraditionalOpenSSL, SubjectPublicKeyInfo for public keys, and PKCS1 for RSA private keys (written in its TraditionalOpenSSL form, the `BEGIN RSA PRIVATE KEY` block).
 
-def setup_argparse():
-    &quot;&quot;&quot;
-    Sets up the argument parser for the command-line interface.
-    &quot;&quot;&quot;
-    parser = argparse.ArgumentParser(description=&quot;Convert between different PEM encoding formats.&quot;)
+## Requirements
 
-    # Input options
-    input_group = parser.add_mutually_exclusive_group(required=True)
-    input_group.add_argument(&quot;-i&quot;, &quot;--input-file&quot;, help=&quot;Path to the input PEM file.&quot;)
-    input_group.add_argument(&quot;-p&quot;, &quot;--private-key&quot;, help=&quot;Paste the private key in PEM format.&quot;)
-    input_group.add_argument(&quot;-u&quot;, &quot;--public-key&quot;, help=&quot;Paste the public key in PEM format.&quot;)
-    input_group.add_argument(&quot;-params&quot;, &quot;--dhparams&quot;, help=&quot;Paste the diffie-hellman parameters in PEM format.&quot;)
+- Python 3
+- `cryptography` 41.0.7 or later (see requirements.txt)
 
-    # Output options
-    parser.add_argument(&quot;-o&quot;, &quot;--output-file&quot;, help=&quot;Path to the output PEM file (default: stdout).&quot;, default=None)
-    parser.add_argument(&quot;-f&quot;, &quot;--output-format&quot;,
-                        choices=[&quot;PKCS1&quot;, &quot;PKCS8&quot;, &quot;SubjectPublicKeyInfo&quot;, &quot;TraditionalOpenSSL&quot;],
-                        default=None,
-                        help=&quot;Output format (default: PKCS8 for a private key, SubjectPublicKeyInfo for a public key).&quot;)</code></pre>
-  </section>
-      <section id="files">
-        <h2>The files that matter</h2>
-        <table><tr><th>File</th><th>Lines</th></tr>
-        <tr><td><code>main.py</code></td><td>204</td></tr>
-        <tr><td><code>README.md</code></td><td>42</td></tr>
-        <tr><td><code>requirements.txt</code></td><td>1</td></tr>
-        <tr><td><code>banner.png</code></td><td>0</td></tr>
-        <tr><td><code>logo.png</code></td><td>0</td></tr>
-        </table>
-        <p>Names doing the work: <span class="mono">setup_argparse, convert_pem, main</span>.</p>
-      </section>
-      <section id="sheets">
-        <h2>Drawn by hand</h2>
-        <p>I sketch my projects on notebook paper so I have to
-        understand them well enough to draw them. The full set,
-        with the counts and how they were counted, is the
-        <a href="https://github.com/ShadowGuard-AI/crypto-pem-format-converter/tree/main/crypto-pem-format-converter-Visuals">crypto-pem-format-converter-Visuals</a>
-        folder in the repo. Nothing is drawn over the binder holes.
-        That is a rule, not a style.</p>
-        <div class="shots">
-          <img src="assets/architecture.png" alt="Hand drawn architecture sheet for Crypto Pem Format Converter">
-          <img src="assets/flowchart.png" alt="Hand drawn flowchart sheet for Crypto Pem Format Converter">
-          <img src="assets/product-map.png" alt="Hand drawn product map sheet for Crypto Pem Format Converter">
-        </div>
-      </section>
-    </div>
-  </section>
-</main>
-<footer>
-  <p>Crypto Pem Format Converter is one of my projects. This page was written
-  from the repo itself on 2026-10-30: the counts are the
-  repo's counts, the code is the repo's code, and the gaps are the
-  repo's gaps.</p>
-</footer>
-</body>
-</html>
+## Install
+
+```bash
+git clone https://github.com/ShadowGuard-AI/crypto-pem-format-converter.git
+cd crypto-pem-format-converter
+pip install -r requirements.txt
+```
+
+## Usage
+
+```bash
+python3 main.py -i private.pem -f PKCS8 -t private
+python3 main.py -i private.pem -f PKCS1 -t private
+python3 main.py -i public.pem -t public
+python3 main.py -i private.pem -t private -e best -pw "secret" -o encrypted.pem
+```
+
+With no `-f`, a private key defaults to PKCS8 and a public key to SubjectPublicKeyInfo. With no `-o`, the converted PEM is printed to stdout. Bad input, an unsupported format for the key type, or a wrong password exits 1.
+
+## Parameters
+
+- `-i`, `--input-file`: Path to the input PEM file. Alternatives are `-p` (paste a private key), `-u` (paste a public key), and `-params` (paste DH parameters); exactly one input source is required.
+- `-o`, `--output-file`: Path to the output PEM file (default: stdout).
+- `-f`, `--output-format`: `PKCS1`, `PKCS8`, `SubjectPublicKeyInfo`, or `TraditionalOpenSSL`.
+- `-t`, `--key-type`: `private`, `public`, or `dhparams` (default: private). The type must match the input.
+- `-e`, `--encryption`: `none` or `best` for private key output (default: none).
+- `-pw`, `--password`: Password that decrypts an encrypted input key, and that encrypts the output when `-e best` is given. One password serves both jobs in a single run.
+
+## Verified run note
+
+The usage and parameters above are taken from the argument parser in `main.py`. A live run in this environment is blocked because the `cryptography` package is not installed here, so even `--help` stops at that import; no run result is claimed for this tool.
+
+## License
+
+Licensed under the terms in LICENSE.</pre></section>
+</main></body></html>
